@@ -1,2 +1,2 @@
 # just-tech-news
-A news-based site with a coding theme, where user can create, like and read posts, update and delete their profile
+A news-based site with a coding theme, where user can create, read, comment and like posts, update and delete their profile
