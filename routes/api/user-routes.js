@@ -65,6 +65,7 @@ router.post('/login', (req, res) => {
         }
         //Verify User
         const validPassword = dbUserData.checkPassword(req.body.password);
+
         if (!validPassword) {
             res.status(400).json({ message: 'Incorrect password!' });
             return;
@@ -111,6 +112,10 @@ router.delete('/:id', (req, res) => {
                 return;
             }
             res.json(dbUserData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
         });
 });
 
