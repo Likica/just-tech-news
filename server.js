@@ -1,13 +1,14 @@
-const express = require('express');
-const routes = require('./controllers');
-const sequelize = require('./config/connection');
 const path = require('path');
+const express = require('express');
+
+//set up Handlebars as my app's template engine of choice
+const exphbs = require('express-handlebars');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-//set up Handlebars as my app's template engine of choice
-const exphbs = require('express-handlebars');
+const sequelize = require('./config/connection');
+
 const hbs = exphbs.create({});
 
 app.engine('handlebars', hbs.engine);
@@ -18,8 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 //path to use public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(require('./controllers'));
+
 //turn on routes
-app.use(routes);
+// app.use(routes);
 
 //turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
